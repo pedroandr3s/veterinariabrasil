@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+/*
+ * Tokens de diseño. Paleta tomada de la gráfica de marca (rosa, magenta y burdeos
+ * sobre fondo crema). Todos los componentes usan estos nombres: basta cambiar aquí.
+ *   paper/sage  fondos (crema rosado / rosa suave)
+ *   ink         texto principal (burdeos casi negro)
+ *   brand       acción principal (magenta profundo, 7.5:1 con texto blanco)
+ *   sun         acento (rosa claro: buen contraste con ink y sobre fondos oscuros)
+ */
+@theme {
+  --color-paper: #fdf7f9;
+  --color-sage: #fbdce8;
+  --color-ink: #410f1c;
+  --color-ink-soft: #6e2f42;
+  --color-brand: #a51446;
+  --color-brand-deep: #7a0f33;
+  --color-sun: #f07ca8;
+  --color-line: #f1c4d4;
+
+  --font-display: "Young Serif", Georgia, "Times New Roman", serif;
+  --font-sans: "Figtree Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html {
+  scroll-padding-top: 5.5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-brand);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.on-dark :focus-visible {
+  outline-color: var(--color-sun);
+}
+
+/* Marco en arco: el recurso visual de la marca para fotos e ilustraciones (relación 4:5). */
+@utility arch {
+  border-radius: 50% 50% 1.75rem 1.75rem / 40% 40% 1.75rem 1.75rem;
+}
+
+/* Única secuencia de entrada de la página: el hero. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: calc(var(--i, 0) * 90ms);
+  }
+}
+
+@keyframes ping-soft {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  80%,
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ping-soft {
+    animation: ping-soft 2s ease-out infinite;
+  }
+}
